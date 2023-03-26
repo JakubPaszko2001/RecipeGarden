@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Lateef&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .button {
+    @apply mt-2 px-8 py-1 border-2 rounded-xl text-2xl;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
