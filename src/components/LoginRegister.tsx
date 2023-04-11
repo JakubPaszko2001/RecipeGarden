@@ -55,6 +55,7 @@ const LoginRegister = () => {
           type="text"
           name="Email"
           id="Email"
+          data-cy="Email"
           onChange={(e) => setEmail(e.target.value)}
         />
         <label className="text-3xl" htmlFor="Password">
@@ -66,6 +67,7 @@ const LoginRegister = () => {
           type="password"
           name="Password"
           id="Password"
+          data-cy="Password"
           onChange={(e) => setPassword(e.target.value)}
         />
         {createUserState ? (
@@ -86,6 +88,7 @@ const LoginRegister = () => {
         <button
           className="mt-2 px-8 py-1 text-white bg-mainGreen rounded-xl text-2xl"
           type="submit"
+          data-cy="loginRegisterButton"
           onClick={() => {
             createUserState ? createUser() : signIn();
           }}

@@ -13,7 +13,7 @@ const MobileNav = ({
         <button>
           <AiOutlineSearch className="text-3xl mr-1" />
         </button>
-        <button>
+        <button data-cy="openHamburgerMenu">
           <GiHamburgerMenu
             onClick={() => setHamburgerMenu(true)}
             className="text-3xl"

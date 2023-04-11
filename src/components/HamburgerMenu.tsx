@@ -35,7 +35,11 @@ const HamburgerMenu = ({ hamburgerMenu, setHamburgerMenu }: Props) => {
         <p className="cursor-pointer">Favorite</p>
       </div>
       <div className="w-full flex justify-center">
-        <button onClick={() => logout()} className="button border-white">
+        <button
+          data-cy="logoutButton"
+          onClick={() => logout()}
+          className="button border-white"
+        >
           Logout
         </button>
       </div>
