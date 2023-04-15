@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import LoginRegister from "./components/LoginRegister";
 import { auth } from "./config/firebase";
 import HeroSection from "./components/HeroSection";
-import fetchCategory from "./config/axios";
+import CategorySection from "./components/CategorySection";
 
 function App() {
   const [currentUser, setCurrentUser] = useState();
@@ -14,14 +14,11 @@ function App() {
     });
   }, []);
 
-  useEffect(() => {
-    fetchCategory();
-  }, []);
-
   return (
     <div className="App font-main flex flex-col">
       {currentUser ? <Navbar /> : <LoginRegister />}
       {currentUser ? <HeroSection /> : null}
+      {currentUser ? <CategorySection /> : null}
     </div>
   );
 }
