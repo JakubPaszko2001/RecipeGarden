@@ -3,7 +3,7 @@ import React from "react";
 const HeroSection = () => {
   return (
     <section className="h-[100vh] flex flex-col justify-center items-center text-5xl">
-      <p>Let’s Start</p>
+      <h2>Let’s Start</h2>
       <p>Cooking With</p>
       <p>Popular Recipes</p>
       <div className="mt-8">
