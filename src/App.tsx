@@ -4,6 +4,7 @@ import LoginRegister from "./components/LoginRegister";
 import { auth } from "./config/firebase";
 import HeroSection from "./components/HeroSection";
 import CategorySection from "./components/CategorySection";
+import PopularRecipe from "./components/PopularRecipe";
 
 function App() {
   const [currentUser, setCurrentUser] = useState();
@@ -19,6 +20,7 @@ function App() {
       {currentUser ? <Navbar /> : <LoginRegister />}
       {currentUser ? <HeroSection /> : null}
       {currentUser ? <CategorySection /> : null}
+      {currentUser ? <PopularRecipe /> : null}
     </div>
   );
 }
