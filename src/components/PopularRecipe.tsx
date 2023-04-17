@@ -7,6 +7,7 @@ const PopularRecipe = () => {
   interface Popular {
     idMeal: string;
     strMealThumb: string;
+    strYoutube: string;
   }
 
   useEffect(() => {
@@ -26,8 +27,18 @@ const PopularRecipe = () => {
       <div className="w-full grid grid-cols-2 gap-4 p-4">
         {popular.length > 0 ? (
           popular.map((item: Popular) => (
-            <div key={item.idMeal}>
+            <div className="flex flex-col gap-2" key={item.idMeal}>
               <img className="rounded-xl" src={item.strMealThumb} />
+              <button className="w-full border-2 border-mainGreen rounded-xl">
+                Details
+              </button>
+              <a
+                href={item.strYoutube}
+                target="_blank"
+                className="w-full text-center border-2 border-mainGreen rounded-xl"
+              >
+                Video
+              </a>
             </div>
           ))
         ) : (
