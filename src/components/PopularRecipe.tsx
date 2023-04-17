@@ -21,17 +21,20 @@ const PopularRecipe = () => {
     fetchPopularRecipe();
   }, []);
   return (
-    <div className="w-full grid grid-cols-2 gap-4 p-4">
-      {popular.length > 0 ? (
-        popular.map((item: Popular) => (
-          <div key={item.idMeal}>
-            <img src={item.strMealThumb} />
-          </div>
-        ))
-      ) : (
-        <p>Loading...</p>
-      )}
-    </div>
+    <section>
+      <h2 className="text-center text-4xl mb-4">Popular Food</h2>
+      <div className="w-full grid grid-cols-2 gap-4 p-4">
+        {popular.length > 0 ? (
+          popular.map((item: Popular) => (
+            <div key={item.idMeal}>
+              <img src={item.strMealThumb} />
+            </div>
+          ))
+        ) : (
+          <p>Loading...</p>
+        )}
+      </div>
+    </section>
   );
 };
 
