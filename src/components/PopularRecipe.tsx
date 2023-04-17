@@ -27,7 +27,7 @@ const PopularRecipe = () => {
         {popular.length > 0 ? (
           popular.map((item: Popular) => (
             <div key={item.idMeal}>
-              <img src={item.strMealThumb} />
+              <img className="rounded-xl" src={item.strMealThumb} />
             </div>
           ))
         ) : (
