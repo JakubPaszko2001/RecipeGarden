@@ -8,10 +8,10 @@ describe("ApiTest.cy.tsx", () => {
         "X-RapidAPI-Host": "themealdb.p.rapidapi.com",
       },
     })
+      .its("status")
+      .should("equal", 200)
       .its("body")
       .its("categories")
       .should("have.length", 14);
-    // .its("status")
-    // .should("equal", 200);
   });
 });
