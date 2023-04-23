@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "./components/Navbar";
-import LoginRegister from "./components/LoginRegister";
 import { auth } from "./config/firebase";
-import HeroSection from "./components/HeroSection";
-import CategorySection from "./components/CategorySection";
-import PopularRecipe from "./components/PopularRecipe";
+import LoginRegister from "./Pages/LoginRegister";
+import Home from "./Pages/Home";
+import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
+import CategoryPage from "./Pages/CategoryPage";
 
 function App() {
   const [currentUser, setCurrentUser] = useState();
@@ -17,10 +16,14 @@ function App() {
 
   return (
     <div className="App font-main flex flex-col">
-      {currentUser ? <Navbar /> : <LoginRegister />}
-      {currentUser ? <HeroSection /> : null}
-      {currentUser ? <CategorySection /> : null}
-      {currentUser ? <PopularRecipe /> : null}
+      {/* {currentUser ? <Home /> : <LoginRegister />} */}
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<LoginRegister />} />
+          <Route path="/category/:category" element={<CategoryPage />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
