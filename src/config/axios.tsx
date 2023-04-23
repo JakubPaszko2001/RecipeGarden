@@ -13,7 +13,7 @@ const fetchCategory = () => {
   return axios
     .request(options)
     .then(function (response) {
-      console.log(response.data.categories);
+      // console.log(response.data.categories);
       return response.data.categories;
     })
     .catch(function (error) {
@@ -35,7 +35,7 @@ const fetchPopular = () => {
   return axios
     .request(options)
     .then(function (response) {
-      console.log(response.data.meals);
+      // console.log(response.data.meals);
       return response.data.meals;
     })
     .catch(function (error) {
@@ -44,4 +44,26 @@ const fetchPopular = () => {
     });
 };
 
-export { fetchCategory, fetchPopular };
+const categoryFetch = (category: string | undefined) => {
+  const options = {
+    method: "GET",
+    url: "https://themealdb.p.rapidapi.com/filter.php",
+    params: { c: category },
+    headers: {
+      "X-RapidAPI-Key": "57607c4060msh8305edef8d177d9p1a088fjsnad865a1577b2",
+      "X-RapidAPI-Host": "themealdb.p.rapidapi.com",
+    },
+  };
+
+  return axios
+    .request(options)
+    .then(function (response) {
+      // console.log(response.data.meals);
+      return response.data.meals;
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+};
+
+export { fetchCategory, fetchPopular, categoryFetch };
