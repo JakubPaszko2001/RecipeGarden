@@ -4,6 +4,7 @@ import LoginRegister from "./Pages/LoginRegister";
 import Home from "./Pages/Home";
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import CategoryPage from "./Pages/CategoryPage";
+import DishDetailPage from "./Pages/DishDetailPage";
 
 function App() {
   const [currentUser, setCurrentUser] = useState();
@@ -22,6 +23,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginRegister />} />
           <Route path="/category/:category" element={<CategoryPage />} />
+          <Route path="/category/:category/:id" element={<DishDetailPage />} />
         </Routes>
       </Router>
     </div>
