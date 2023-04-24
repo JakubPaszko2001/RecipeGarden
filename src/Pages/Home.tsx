@@ -1,5 +1,5 @@
 import React from "react";
-import PopularRecipe from "../components/PopularRecipe";
+import PopularRecipeSection from "../components/PopularRecipeSection";
 import CategorySection from "../components/CategorySection";
 import HeroSection from "../components/HeroSection";
 import Navbar from "../components/Navbar";
@@ -10,7 +10,7 @@ const Home = () => {
       <Navbar />
       <HeroSection />
       <CategorySection />
-      <PopularRecipe />
+      <PopularRecipeSection />
     </>
   );
 };
