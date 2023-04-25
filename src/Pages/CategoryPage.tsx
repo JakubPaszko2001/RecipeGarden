@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { categoryFetch } from "../config/axios";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
-// type Category = {
-//   idMeal: string;
-//   strMeal: string;
-//   strMealThumb: string;
-// }[]
 interface Category {
   idMeal: string;
   strMeal: string;
@@ -15,8 +11,9 @@ interface Category {
 
 const CategoryPage = () => {
   const [categoryData, setCategoryData] = useState([]);
+  const navigate = useNavigate();
   const { category } = useParams();
-  // console.log(category);
+  console.log(category);
   useEffect(() => {
     const categoryFetchData = async () => {
       try {
@@ -29,9 +26,13 @@ const CategoryPage = () => {
     };
     categoryFetchData();
   }, []);
+
+  const navigateToDetails = (dishId: string) => {
+    navigate(`/Category/${category}/${dishId}`);
+  };
   return (
     <section>
-      <h2 className="text-center text-4xl mb-4">Popular Food</h2>
+      <h2 className="text-center text-4xl mb-4">{category}</h2>
       <div className="w-full grid grid-cols-2 gap-4 p-4">
         {categoryData &&
           categoryData.map((item: Category) => (
@@ -41,8 +42,13 @@ const CategoryPage = () => {
                 src={item.strMealThumb}
                 alt={item.strMeal}
               />
-              <p className="text-lg font-bold">{item.strMeal}</p>
-              <button className="w-full border-2 border-mainGreen rounded-xl">
+              {/* <p className="text-lg font-bold">{item.strMeal}</p> */}
+              <button
+                onClick={() => {
+                  navigateToDetails(item.idMeal);
+                }}
+                className="w-full border-2 border-mainGreen rounded-xl"
+              >
                 Details
               </button>
             </div>
