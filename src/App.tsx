@@ -23,7 +23,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginRegister />} />
           <Route path="/category/:category" element={<CategoryPage />} />
-          <Route path="/category/:category/:id" element={<DishDetailPage />} />
+          <Route
+            path="/category/:category/:dishId"
+            element={<DishDetailPage />}
+          />
         </Routes>
       </Router>
     </div>
