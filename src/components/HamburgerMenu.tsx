@@ -15,7 +15,7 @@ const HamburgerMenu = ({ hamburgerMenu, setHamburgerMenu }: Props) => {
   return (
     <nav
       className={`w-full h-screen fixed ${
-        hamburgerMenu ? "top-[0%]" : "top-[-100%]"
+        hamburgerMenu ? "top-[0%]" : "top-[-100vh]"
       } left-0 bg-mainGreen ease-in duration-300 text-white`}
     >
       <div className="h-[10vh] w-full flex justify-end items-center p-4">
