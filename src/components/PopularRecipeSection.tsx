@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { fetchPopular } from "../config/axios";
+import { useNavigate } from "react-router-dom";
 
 const PopularRecipe = () => {
   const [popular, setPopular] = useState([]);
+  const navigate = useNavigate();
 
   interface Popular {
     idMeal: string;
@@ -21,6 +23,11 @@ const PopularRecipe = () => {
     };
     fetchPopularRecipe();
   }, []);
+
+  const navigateToDetails = (dishId: string) => {
+    navigate(`/Category/Dish/${dishId}`);
+  };
+
   return (
     <section>
       <h2 className="text-center text-4xl mb-4">Popular Food</h2>
@@ -29,7 +36,10 @@ const PopularRecipe = () => {
           popular.map((item: Popular) => (
             <div className="flex flex-col gap-2" key={item.idMeal}>
               <img className="rounded-xl" src={item.strMealThumb} />
-              <button className="w-full border-2 border-mainGreen rounded-xl">
+              <button
+                onClick={() => navigateToDetails(item.idMeal)}
+                className="w-full border-2 border-mainGreen rounded-xl"
+              >
                 Details
               </button>
               <a
