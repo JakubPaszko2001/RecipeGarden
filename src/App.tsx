@@ -17,16 +17,20 @@ function App() {
 
   return (
     <div className="App font-main flex flex-col">
-      {/* {currentUser ? <Home /> : <LoginRegister />} */}
       <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<LoginRegister />} />
-          <Route path="/category/:category" element={<CategoryPage />} />
-          <Route
-            path="/category/:category/:dishId"
-            element={<DishDetailPage />}
-          />
+          {currentUser ? (
+            <>
+              <Route path="/" element={<Home />} />
+              <Route path="/category/:category" element={<CategoryPage />} />
+              <Route
+                path="/category/:category/:dishId"
+                element={<DishDetailPage />}
+              />
+            </>
+          ) : (
+            <Route path="/" element={<LoginRegister />} />
+          )}
         </Routes>
       </Router>
     </div>
