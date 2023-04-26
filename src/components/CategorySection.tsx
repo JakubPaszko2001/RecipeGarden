@@ -45,7 +45,7 @@ const CategorySection = () => {
       >
         {category.length > 0 ? (
           category.slice(0, 12).map((item: Category) => (
-            <SwiperSlide key={item.idCategory}>
+            <SwiperSlide data-cy="categoryElement" key={item.idCategory}>
               <button onClick={() => handleCategoryClick(item.strCategory)}>
                 <img src={item.strCategoryThumb} />
                 <p className="text-xl">{item.strCategory}</p>
