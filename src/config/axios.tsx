@@ -44,7 +44,7 @@ const fetchPopular = () => {
     });
 };
 
-const categoryFetch = (category: string | undefined) => {
+const fetchSpecificCategory = (category: string | undefined) => {
   const options = {
     method: "GET",
     url: "https://themealdb.p.rapidapi.com/filter.php",
@@ -65,7 +65,7 @@ const categoryFetch = (category: string | undefined) => {
       console.error(error);
     });
 };
-const dishFetch = (dishId: string | undefined) => {
+const fetchDish = (dishId: string | undefined) => {
   const options = {
     method: "GET",
     url: "https://themealdb.p.rapidapi.com/lookup.php",
@@ -88,4 +88,4 @@ const dishFetch = (dishId: string | undefined) => {
     });
 };
 
-export { fetchCategory, fetchPopular, categoryFetch, dishFetch };
+export { fetchCategory, fetchPopular, fetchSpecificCategory, fetchDish };
