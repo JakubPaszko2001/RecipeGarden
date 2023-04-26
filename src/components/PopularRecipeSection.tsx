@@ -30,7 +30,7 @@ const PopularRecipe = () => {
 
   return (
     <section>
-      <h2 className="text-center text-4xl mb-4">Popular Food</h2>
+      <h2 className="text-center text-4xl mb-4">Popular Recipe's</h2>
       <div className="w-full grid grid-cols-2 gap-4 p-4">
         {popular.length > 0 ? (
           popular.map((item: Popular) => (
@@ -43,6 +43,7 @@ const PopularRecipe = () => {
                 Details
               </button>
               <a
+                data-cy="recipeVideo"
                 href={item.strYoutube}
                 target="_blank"
                 className="w-full text-center border-2 border-mainGreen rounded-xl"
