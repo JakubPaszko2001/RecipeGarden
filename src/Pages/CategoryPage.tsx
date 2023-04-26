@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { categoryFetch } from "../config/axios";
+import { fetchSpecificCategory } from "../config/axios";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
@@ -17,7 +17,7 @@ const CategoryPage = () => {
   useEffect(() => {
     const categoryFetchData = async () => {
       try {
-        const response = await categoryFetch(category);
+        const response = await fetchSpecificCategory(category);
         console.log(response);
         setCategoryData(response);
       } catch (error) {
@@ -44,6 +44,7 @@ const CategoryPage = () => {
               />
               {/* <p className="text-lg font-bold">{item.strMeal}</p> */}
               <button
+                data-cy="detailsButton"
                 onClick={() => {
                   navigateToDetails(item.idMeal);
                 }}
