@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { dishFetch } from "../config/axios";
+import { fetchDish } from "../config/axios";
 const DishDetailPage = () => {
   const [dishData, setDishData] = useState([]);
   const { dishId } = useParams();
@@ -13,7 +13,7 @@ const DishDetailPage = () => {
   useEffect(() => {
     const dishFetchData = async () => {
       try {
-        const response = await dishFetch(dishId);
+        const response = await fetchDish(dishId);
         // console.log(response);
         setDishData(response);
         console.log(dishData);
