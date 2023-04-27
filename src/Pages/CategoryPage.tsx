@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchSpecificCategory } from "../config/axios";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import LazyLoad from "react-lazy-load";
 
 interface Category {
   idMeal: string;
@@ -36,23 +37,25 @@ const CategoryPage = () => {
       <div className="w-full grid grid-cols-2 gap-4 p-4">
         {categoryData &&
           categoryData.map((item: Category) => (
-            <div className="flex flex-col gap-2" key={item.idMeal}>
-              <img
-                className="rounded-xl"
-                src={item.strMealThumb}
-                alt={item.strMeal}
-              />
-              {/* <p className="text-lg font-bold">{item.strMeal}</p> */}
-              <button
-                data-cy="detailsButton"
-                onClick={() => {
-                  navigateToDetails(item.idMeal);
-                }}
-                className="w-full border-2 border-mainGreen rounded-xl"
-              >
-                Details
-              </button>
-            </div>
+            <LazyLoad height={200}>
+              <div className="flex flex-col gap-2" key={item.idMeal}>
+                <img
+                  className="rounded-xl"
+                  src={item.strMealThumb}
+                  alt={item.strMeal}
+                />
+                {/* <p className="text-lg font-bold">{item.strMeal}</p> */}
+                <button
+                  data-cy="detailsButton"
+                  onClick={() => {
+                    navigateToDetails(item.idMeal);
+                  }}
+                  className="w-full border-2 border-mainGreen rounded-xl"
+                >
+                  Details
+                </button>
+              </div>
+            </LazyLoad>
           ))}
       </div>
     </section>
