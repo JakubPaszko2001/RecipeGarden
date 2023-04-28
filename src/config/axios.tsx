@@ -17,7 +17,7 @@ const fetchCategory = () => {
       return response.data.categories;
     })
     .catch(function (error) {
-      console.error(error);
+      // console.error(error);
       throw error;
     });
 };
@@ -39,7 +39,7 @@ const fetchPopular = () => {
       return response.data.meals;
     })
     .catch(function (error) {
-      console.error(error);
+      // console.error(error);
       throw error;
     });
 };
@@ -62,7 +62,7 @@ const fetchSpecificCategory = (category: string | undefined) => {
       return response.data.meals;
     })
     .catch(function (error) {
-      console.error(error);
+      // console.error(error);
     });
 };
 const fetchDish = (dishId: string | undefined) => {
@@ -80,11 +80,11 @@ const fetchDish = (dishId: string | undefined) => {
   return axios
     .request(options)
     .then(function (response) {
-      console.log(response.data.meals);
+      // console.log(response.data.meals);
       return response.data.meals;
     })
     .catch(function (error) {
-      console.error(error);
+      // console.error(error);
     });
 };
 
