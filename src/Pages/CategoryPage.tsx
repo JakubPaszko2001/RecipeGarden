@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchSpecificCategory } from "../config/axios";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import LazyLoad from "react-lazy-load";
+import { LazyLoadComponent } from "react-lazy-load-image-component";
 
 interface Category {
   idMeal: string;
@@ -37,8 +37,9 @@ const CategoryPage = () => {
       <div className="w-full grid grid-cols-2 gap-4 p-4">
         {categoryData &&
           categoryData.map((item: Category) => (
-            <LazyLoad height={200}>
-              <div className="flex flex-col gap-2" key={item.idMeal}>
+            // <LazyLoad className="justify-self-center" width={"40vw"}>
+            <LazyLoadComponent key={item.idMeal} height={200}>
+              <div className="flex flex-col gap-2">
                 <img
                   className="rounded-xl"
                   src={item.strMealThumb}
@@ -55,7 +56,7 @@ const CategoryPage = () => {
                   Details
                 </button>
               </div>
-            </LazyLoad>
+            </LazyLoadComponent>
           ))}
       </div>
     </section>
