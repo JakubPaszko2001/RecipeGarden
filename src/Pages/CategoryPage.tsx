@@ -47,7 +47,6 @@ const CategoryPage = () => {
                   src={item.strMealThumb}
                   alt={item.strMeal}
                 />
-                {/* <p className="text-lg font-bold">{item.strMeal}</p> */}
                 <button
                   data-cy="detailsButton"
                   onClick={() => {
