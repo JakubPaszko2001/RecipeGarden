@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { fetchSpecificCategory } from "../config/axios";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { LazyLoadComponent } from "react-lazy-load-image-component";
 import Navbar from "../components/Navbar";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 interface Category {
   idMeal: string;
@@ -39,25 +39,22 @@ const CategoryPage = () => {
       <div className="w-full grid grid-cols-2 gap-4 p-4">
         {categoryData &&
           categoryData.map((item: Category) => (
-            // <LazyLoad className="justify-self-center" width={"40vw"}>
-            <LazyLoadComponent key={item.idMeal} height={200}>
-              <div className="flex flex-col gap-2">
-                <img
-                  className="rounded-xl"
-                  src={item.strMealThumb}
-                  alt={item.strMeal}
-                />
-                <button
-                  data-cy="detailsButton"
-                  onClick={() => {
-                    navigateToDetails(item.idMeal);
-                  }}
-                  className="w-full border-2 border-mainGreen rounded-xl"
-                >
-                  Details
-                </button>
-              </div>
-            </LazyLoadComponent>
+            <div key={item.idMeal} className="flex flex-col gap-2">
+              <LazyLoadImage
+                className="rounded-xl"
+                src={item.strMealThumb}
+                alt={item.strMeal}
+              />
+              <button
+                data-cy="detailsButton"
+                onClick={() => {
+                  navigateToDetails(item.idMeal);
+                }}
+                className="w-full border-2 border-mainGreen rounded-xl"
+              >
+                Details
+              </button>
+            </div>
           ))}
       </div>
     </section>
