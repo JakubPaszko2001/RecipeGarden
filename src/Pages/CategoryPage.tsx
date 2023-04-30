@@ -3,6 +3,7 @@ import { fetchSpecificCategory } from "../config/axios";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { LazyLoadComponent } from "react-lazy-load-image-component";
+import Navbar from "../components/Navbar";
 
 interface Category {
   idMeal: string;
@@ -33,7 +34,8 @@ const CategoryPage = () => {
   };
   return (
     <section>
-      <h2 className="text-center text-4xl mb-4">{category}</h2>
+      <Navbar />
+      <h2 className="mt-[10vh] text-center text-4xl mb-4">{category}</h2>
       <div className="w-full grid grid-cols-2 gap-4 p-4">
         {categoryData &&
           categoryData.map((item: Category) => (
