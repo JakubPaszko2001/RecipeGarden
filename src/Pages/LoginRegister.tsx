@@ -40,7 +40,7 @@ const LoginRegister = () => {
   };
 
   return (
-    <div>
+    <section>
       <form
         onSubmit={onSubmit}
         className="w-full h-screen flex flex-col justify-center items-center gap-2"
@@ -105,7 +105,7 @@ const LoginRegister = () => {
           {createUserState ? "Already have an account?" : "Create Account"}
         </p>
       </form>
-    </div>
+    </section>
   );
 };
 
