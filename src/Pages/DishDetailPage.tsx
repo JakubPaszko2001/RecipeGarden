@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchDish } from "../config/axios";
+import Navbar from "../components/Navbar";
 
 interface Dish {
   [key: string]: string;
@@ -88,33 +89,34 @@ const DishDetailPage = () => {
 
   console.log(dishData, "dishData");
   return (
-    <div>
-      <div>
+    <>
+      <Navbar />
+      <div className="mt-[10vh]">
         {dishData.map((dish) => (
           <img key={dish.strMealThumb} src={dish.strMealThumb} />
         ))}
       </div>
-      <div>
+      <section>
         <h2>Ingredients:</h2>
         <ul>
           {ingredients.map((ingredient, index) => (
             <li key={index}>{ingredient}</li>
           ))}
         </ul>
-      </div>
-      <div>
+      </section>
+      <section>
         <h2>Mesures:</h2>
         <ul>
           {measures.map((mesure, index) => (
             <li key={index}>{mesure}</li>
           ))}
         </ul>
-      </div>
-      <div>
+      </section>
+      <section>
         <h2>Instructions:</h2>
         <p>{dishData[0]?.strInstructions}</p>
-      </div>
-    </div>
+      </section>
+    </>
   );
 };
 
