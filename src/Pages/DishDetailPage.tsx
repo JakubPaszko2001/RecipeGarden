@@ -2,10 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchDish } from "../config/axios";
 import Navbar from "../components/Navbar";
+import { getDocs, doc, setDoc, collection } from "firebase/firestore";
+import { colRef, db } from "../config/firebase";
 
 interface Dish {
   [key: string]: string;
+  idMeal: string;
   strMealThumb: string;
+  strMeal: string;
   strInstructions: string;
   strIngredient1: string;
   strIngredient2: string;
@@ -65,50 +69,56 @@ const DishDetailPage = () => {
     dishFetchData();
   }, []);
 
-  const ingredients = [];
+  const ingredientsAndMeasures = [];
 
   if (dishData.length > 0) {
     for (let i = 1; i <= 20; i++) {
       const ingredient = dishData[0][`strIngredient${i}`];
-      if (ingredient) {
-        ingredients.push(ingredient);
-      }
-    }
-  }
-
-  const measures = [];
-
-  if (dishData.length > 0) {
-    for (let i = 1; i <= 20; i++) {
       const measure = dishData[0][`strMeasure${i}`];
-      if (measure) {
-        measures.push(measure);
+
+      if (ingredient && measure) {
+        ingredientsAndMeasures.push({ ingredient, measure });
       }
     }
   }
 
   console.log(dishData, "dishData");
+  if (ingredientsAndMeasures.length > 0) {
+    // console.log(ingredientsAndMeasures, "ingredientsAndMeasures");
+  }
+
+  const collectionRef = collection(
+    db,
+    "Ingredients",
+    "CQeD2oQS6sWhpAM5i0Wfpfk5Gfm1",
+    "Dish"
+  );
+
+  const getAllDocuments = async () => {
+    const querySnapshot = await getDocs(collectionRef);
+    querySnapshot.forEach((doc) => {
+      console.log(`${doc.id}`);
+    });
+  };
+
+  getAllDocuments();
+
   return (
     <>
       <Navbar />
       <div className="mt-[10vh]">
         {dishData.map((dish) => (
-          <img key={dish.strMealThumb} src={dish.strMealThumb} />
+          <img key={dish.idMeal} src={dish.strMealThumb} alt={dish.strMeal} />
         ))}
       </div>
       <section>
         <h2>Ingredients:</h2>
         <ul>
-          {ingredients.map((ingredient, index) => (
-            <li key={index}>{ingredient}</li>
-          ))}
-        </ul>
-      </section>
-      <section>
-        <h2>Mesures:</h2>
-        <ul>
-          {measures.map((mesure, index) => (
-            <li key={index}>{mesure}</li>
+          {ingredientsAndMeasures.map((ingredientAndMesasure, index) => (
+            <li key={index}>
+              {ingredientAndMesasure.ingredient} -
+              {ingredientAndMesasure.measure}
+            </li>
           ))}
         </ul>
       </section>
@@ -116,6 +126,18 @@ const DishDetailPage = () => {
         <h2>Instructions:</h2>
         <p>{dishData[0]?.strInstructions}</p>
       </section>
+      <button
+        onClick={() => {
+          const docRef = doc(colRef, "Oslo");
+          setDoc(docRef, {
+            str1: "hello",
+            checked: false,
+            strName: "Bukszpan",
+          });
+        }}
+      >
+        Add Doc
+      </button>
     </>
   );
 };
