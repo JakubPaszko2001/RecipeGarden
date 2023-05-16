@@ -53,9 +53,11 @@ interface Dish {
   strMeasure20: string;
 }
 
-const DishDetailPage = () => {
+const DishDetailPage = ({ currentUser }: { currentUser: any }) => {
   const [dishData, setDishData] = useState<Dish[]>([]);
   const { dishId } = useParams();
+
+  // console.log(currentUser.uid);
 
   useEffect(() => {
     const dishFetchData = async () => {
@@ -69,7 +71,7 @@ const DishDetailPage = () => {
     dishFetchData();
   }, []);
 
-  const ingredientsAndMeasures = [];
+  const ingredientsAndMeasures: { ingredient: string; measure: string }[] = [];
 
   if (dishData.length > 0) {
     for (let i = 1; i <= 20; i++) {
@@ -82,17 +84,7 @@ const DishDetailPage = () => {
     }
   }
 
-  console.log(dishData, "dishData");
-  if (ingredientsAndMeasures.length > 0) {
-    // console.log(ingredientsAndMeasures, "ingredientsAndMeasures");
-  }
-
-  const collectionRef = collection(
-    db,
-    "Ingredients",
-    "CQeD2oQS6sWhpAM5i0Wfpfk5Gfm1",
-    "Dish"
-  );
+  const collectionRef = collection(db, "Ingredients", currentUser.uid, "Dish");
 
   const getAllDocuments = async () => {
     const querySnapshot = await getDocs(collectionRef);
@@ -103,6 +95,8 @@ const DishDetailPage = () => {
 
   getAllDocuments();
 
+  console.log(ingredientsAndMeasures);
+  console.log(dishData);
   return (
     <>
       <Navbar />
@@ -122,22 +116,25 @@ const DishDetailPage = () => {
           ))}
         </ul>
       </section>
+      <button
+        onClick={async () => {
+          const dishRef = doc(collectionRef, dishData[0].strMeal);
+          const newDishData = {
+            name: dishData[0].strMeal,
+            ingredients: ingredientsAndMeasures.map((ingredientAndMeasure) => ({
+              ingredient: ingredientAndMeasure.ingredient,
+              measure: ingredientAndMeasure.measure,
+            })),
+          };
+          await setDoc(dishRef, newDishData);
+        }}
+      >
+        Add Ingredients to shopping list
+      </button>
       <section>
         <h2>Instructions:</h2>
         <p>{dishData[0]?.strInstructions}</p>
       </section>
-      <button
-        onClick={() => {
-          const docRef = doc(colRef, "Oslo");
-          setDoc(docRef, {
-            str1: "hello",
-            checked: false,
-            strName: "Bukszpan",
-          });
-        }}
-      >
-        Add Doc
-      </button>
     </>
   );
 };
