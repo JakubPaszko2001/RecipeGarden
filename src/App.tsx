@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import CategoryPage from "./Pages/CategoryPage";
 import DishDetailPage from "./Pages/DishDetailPage";
 import Loading from "./components/Loading";
+import ShoppingListPage from "./Pages/ShoppingListPage";
 
 function App() {
   const [currentUser, setCurrentUser] = useState();
@@ -38,6 +39,7 @@ function App() {
                 path="/category/:category/:dishId"
                 element={<DishDetailPage currentUser={currentUser} />}
               />
+              <Route path="/shoppinglist" element={<ShoppingListPage />} />
             </>
           ) : (
             <Route path="/" element={<LoginRegister />} />
