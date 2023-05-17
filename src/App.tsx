@@ -39,7 +39,10 @@ function App() {
                 path="/category/:category/:dishId"
                 element={<DishDetailPage currentUser={currentUser} />}
               />
-              <Route path="/shoppinglist" element={<ShoppingListPage />} />
+              <Route
+                path="/shoppinglist"
+                element={<ShoppingListPage currentUser={currentUser} />}
+              />
             </>
           ) : (
             <Route path="/" element={<LoginRegister />} />
