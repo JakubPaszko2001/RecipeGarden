@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
 import { auth } from "../config/firebase";
 
@@ -7,11 +8,16 @@ interface Props {
   setHamburgerMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const logout = () => {
-  return auth.signOut();
-};
-
 const HamburgerMenu = ({ hamburgerMenu, setHamburgerMenu }: Props) => {
+  const navigate = useNavigate();
+  const navigateToShoppingList = () => {
+    navigate(`/shoppinglist`);
+  };
+
+  const logout = () => {
+    return auth.signOut();
+  };
+
   return (
     <nav
       className={`w-full h-screen fixed ${
@@ -31,7 +37,14 @@ const HamburgerMenu = ({ hamburgerMenu, setHamburgerMenu }: Props) => {
         <p className="text-3xl">UserName</p>
       </div>
       <div className="w-full flex flex-col justify-start items-center text-2xl mt-12">
-        <p className="cursor-pointer">Shopping List</p>
+        <p
+          onClick={() => {
+            navigateToShoppingList();
+          }}
+          className="cursor-pointer"
+        >
+          Shopping List
+        </p>
         <p className="cursor-pointer">Favorite</p>
       </div>
       <div className="w-full flex justify-center">
