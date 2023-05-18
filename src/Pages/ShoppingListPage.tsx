@@ -1,10 +1,25 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../config/firebase";
 
-const ShoppingList = ({ currentUser }: { currentUser: any }) => {
-  const [shoppingList, setShoppingList] = useState<string[]>([]);
+interface ShoppingListProps {
+  currentUser: any;
+}
+
+interface Ingredient {
+  ingredient: string;
+  measure: string;
+}
+
+interface Recipe {
+  ingredients: Ingredient[];
+  name: string;
+  timestamp: { seconds: number; nanoseconds: number };
+}
+
+const ShoppingList: React.FC<ShoppingListProps> = ({ currentUser }) => {
+  const [shoppingList, setShoppingList] = useState<Recipe[]>([]);
 
   useEffect(() => {
     getAllDocuments();
@@ -13,11 +28,13 @@ const ShoppingList = ({ currentUser }: { currentUser: any }) => {
   const collectionRef = collection(db, "Ingredients", currentUser.uid, "Dish");
 
   const getAllDocuments = async () => {
-    const querySnapshot = await getDocs(collectionRef);
-    const items: string[] = [];
+    const querySnapshot = await getDocs(
+      query(collectionRef, orderBy("timestamp", "desc"))
+    );
+    const items: Recipe[] = [];
 
     querySnapshot.forEach((doc) => {
-      items.push(doc.id);
+      items.push(doc.data() as Recipe);
     });
 
     setShoppingList(items);
@@ -29,7 +46,8 @@ const ShoppingList = ({ currentUser }: { currentUser: any }) => {
     <div>
       <Navbar />
       <div className="mt-[10vh]">
-        {shoppingList && shoppingList.map((item) => <p key={item}>{item}</p>)}
+        {shoppingList &&
+          shoppingList.map((item) => <p key={item.name}>{item.name}</p>)}
       </div>
     </div>
   );
