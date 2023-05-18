@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchDish } from "../config/axios";
 import Navbar from "../components/Navbar";
-import { getDocs, doc, setDoc, collection } from "firebase/firestore";
+import {
+  getDocs,
+  doc,
+  setDoc,
+  collection,
+  serverTimestamp,
+} from "firebase/firestore";
 import { colRef, db } from "../config/firebase";
 
 interface Dish {
@@ -125,6 +131,7 @@ const DishDetailPage = ({ currentUser }: { currentUser: any }) => {
               ingredient: ingredientAndMeasure.ingredient,
               measure: ingredientAndMeasure.measure,
             })),
+            timestamp: serverTimestamp(),
           };
           await setDoc(dishRef, newDishData);
         }}
