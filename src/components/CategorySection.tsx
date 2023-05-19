@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { useNavigate } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/pagination";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const CategorySection = () => {
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ const CategorySection = () => {
           category.slice(0, 12).map((item: Category) => (
             <SwiperSlide data-cy="categoryElement" key={item.idCategory}>
               <button onClick={() => handleCategoryClick(item.strCategory)}>
-                <img src={item.strCategoryThumb} />
+                <LazyLoadImage src={item.strCategoryThumb} />
                 <p className="text-xl">{item.strCategory}</p>
               </button>
             </SwiperSlide>

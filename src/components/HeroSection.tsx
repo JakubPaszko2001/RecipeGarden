@@ -1,4 +1,6 @@
 import React from "react";
+import LandingPageDish from "../assets/LandingPageDish.webp";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const HeroSection = () => {
   return (
@@ -12,6 +14,11 @@ const HeroSection = () => {
         </button>
         <button className="button border-mainGreen ml-2">Explore Menu</button>
       </div>
+      <LazyLoadImage
+        src={LandingPageDish}
+        alt="Landing Page Dish"
+        className="absolute bottom-[-20px] left-[-110px] w-[80vw] -z-10 max-w-[310px]"
+      />
     </section>
   );
 };

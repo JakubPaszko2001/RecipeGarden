@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { fetchPopular } from "../config/axios";
 import { useNavigate } from "react-router-dom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const PopularRecipe = () => {
   const [popular, setPopular] = useState([]);
@@ -35,7 +36,7 @@ const PopularRecipe = () => {
         {popular.length > 0 ? (
           popular.map((item: Popular) => (
             <div className="flex flex-col gap-2" key={item.idMeal}>
-              <img className="rounded-xl" src={item.strMealThumb} />
+              <LazyLoadImage className="rounded-xl" src={item.strMealThumb} />
               <button
                 onClick={() => navigateToDetails(item.idMeal)}
                 className="w-full border-2 border-mainGreen rounded-xl"
