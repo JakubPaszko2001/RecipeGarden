@@ -34,7 +34,7 @@ const CategorySection = () => {
 
   return (
     <section className="w-full flex flex-col justify-center items-center gap-4">
-      <h2 className="text-4xl">Food Categorys</h2>
+      <h2 className="text-4xl mt-4">Food Categorys</h2>
       <Swiper
         slidesPerView={3}
         spaceBetween={30}
