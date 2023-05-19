@@ -10,6 +10,7 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { colRef, db } from "../config/firebase";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 interface Dish {
   [key: string]: string;
@@ -106,40 +107,51 @@ const DishDetailPage = ({ currentUser }: { currentUser: any }) => {
   return (
     <>
       <Navbar />
-      <div className="mt-[10vh]">
+      <div className="flex flex-col justify-center items-center mt-[10vh]">
         {dishData.map((dish) => (
-          <img key={dish.idMeal} src={dish.strMealThumb} alt={dish.strMeal} />
+          <LazyLoadImage
+            key={dish.idMeal}
+            src={dish.strMealThumb}
+            alt={dish.strMeal}
+            className="w-1/2 m-auto rounded-xl"
+          />
         ))}
+        <p className="text-3xl">{dishData[0]?.strMeal}</p>
       </div>
-      <section>
-        <h2>Ingredients:</h2>
+      <section className="p-8">
         <ul>
           {ingredientsAndMeasures.map((ingredientAndMesasure, index) => (
-            <li key={index}>
+            <li
+              className="w-full my-2 py-2 px-4 text-2xl bg-mainGreen text-white rounded-xl"
+              key={index}
+            >
               {ingredientAndMesasure.ingredient} -
               {ingredientAndMesasure.measure}
             </li>
           ))}
         </ul>
+        <button
+          className="w-full py-2 px-4 text-2xl border-2 border-mainGreen rounded-xl"
+          onClick={async () => {
+            const dishRef = doc(collectionRef, dishData[0].strMeal);
+            const newDishData = {
+              name: dishData[0].strMeal,
+              ingredients: ingredientsAndMeasures.map(
+                (ingredientAndMeasure) => ({
+                  ingredient: ingredientAndMeasure.ingredient,
+                  measure: ingredientAndMeasure.measure,
+                })
+              ),
+              timestamp: serverTimestamp(),
+            };
+            await setDoc(dishRef, newDishData);
+          }}
+        >
+          Add Ingredients to shopping list
+        </button>
       </section>
-      <button
-        onClick={async () => {
-          const dishRef = doc(collectionRef, dishData[0].strMeal);
-          const newDishData = {
-            name: dishData[0].strMeal,
-            ingredients: ingredientsAndMeasures.map((ingredientAndMeasure) => ({
-              ingredient: ingredientAndMeasure.ingredient,
-              measure: ingredientAndMeasure.measure,
-            })),
-            timestamp: serverTimestamp(),
-          };
-          await setDoc(dishRef, newDishData);
-        }}
-      >
-        Add Ingredients to shopping list
-      </button>
-      <section>
-        <h2>Instructions:</h2>
+      <section className="m-8 p-4 text-xl bg-mainGreen text-white rounded-xl">
+        <h2 className="text-2xl">Instructions:</h2>
         <p>{dishData[0]?.strInstructions}</p>
       </section>
     </>
