@@ -10,10 +10,10 @@ const MobileNav = ({
   return (
     <>
       <div className="flex items-center">
-        <button>
+        <button aria-label="Search for dish">
           <AiOutlineSearch className="text-3xl mr-1" />
         </button>
-        <button data-cy="openHamburgerMenu">
+        <button data-cy="openHamburgerMenu" aria-label="Open Menu">
           <GiHamburgerMenu
             onClick={() => setHamburgerMenu(true)}
             className="text-3xl"
