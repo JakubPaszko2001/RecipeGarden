@@ -140,6 +140,7 @@ const DishDetailPage = ({ currentUser }: { currentUser: any }) => {
                 (ingredientAndMeasure) => ({
                   ingredient: ingredientAndMeasure.ingredient,
                   measure: ingredientAndMeasure.measure,
+                  checked: false,
                 })
               ),
               timestamp: serverTimestamp(),
