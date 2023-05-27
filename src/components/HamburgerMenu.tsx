@@ -22,7 +22,7 @@ const HamburgerMenu = ({ hamburgerMenu, setHamburgerMenu }: Props) => {
     <nav
       className={`w-full h-screen fixed ${
         hamburgerMenu ? "top-[0%]" : "top-[-100vh]"
-      } left-0 bg-mainGreen ease-in duration-300 text-white`}
+      } left-0 bg-mainGreen ease-in duration-300 text-white z-50`}
     >
       <div className="h-[10vh] w-full flex justify-end items-center p-4">
         <button>
