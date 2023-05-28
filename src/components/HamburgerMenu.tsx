@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
 import { auth } from "../config/firebase";
@@ -9,6 +9,13 @@ interface Props {
 }
 
 const HamburgerMenu = ({ hamburgerMenu, setHamburgerMenu }: Props) => {
+  const [currentUserName, setCurrentUserName] = useState("");
+  useEffect(() => {
+    const subscribe = auth.onAuthStateChanged((user: any) => {
+      setCurrentUserName(user.email);
+    });
+  }, []);
+
   const navigate = useNavigate();
   const navigateToShoppingList = () => {
     navigate(`/shoppinglist`);
@@ -34,7 +41,7 @@ const HamburgerMenu = ({ hamburgerMenu, setHamburgerMenu }: Props) => {
       </div>
       <div className="h-[30vh] w-full flex flex-col justify-center items-center gap-4">
         <div className="w-[125px] h-[125px] bg-white rounded-full"></div>
-        <p className="text-3xl">UserName</p>
+        <p className="text-3xl">{currentUserName}</p>
       </div>
       <div className="w-full flex flex-col justify-start items-center text-2xl mt-12">
         <p
