@@ -3,12 +3,17 @@ import Navbar from "../components/Navbar";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { AiOutlineDown } from "react-icons/ai";
+import {
+  MdOutlineCheckBox,
+  MdOutlineCheckBoxOutlineBlank,
+} from "react-icons/md";
 
 interface ShoppingListProps {
   currentUser: any;
 }
 
 interface Ingredient {
+  checked: boolean;
   ingredient: string;
   measure: string;
 }
@@ -72,10 +77,18 @@ const ShoppingList: React.FC<ShoppingListProps> = ({ currentUser }) => {
                   `}
                 >
                   {item.ingredients.map((ingredient, index) => (
-                    <li key={index}>
+                    <li
+                      className="w-full flex justify-between items-center"
+                      key={index}
+                    >
                       <h3>
                         {ingredient.ingredient} - {ingredient.measure}
                       </h3>
+                      {ingredient.checked === true ? (
+                        <MdOutlineCheckBox />
+                      ) : (
+                        <MdOutlineCheckBoxOutlineBlank />
+                      )}
                     </li>
                   ))}
                 </ul>
