@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  orderBy,
+  query,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../config/firebase";
 import { AiOutlineDown } from "react-icons/ai";
 import {
@@ -53,6 +60,37 @@ const ShoppingList: React.FC<ShoppingListProps> = ({ currentUser }) => {
 
   console.log(shoppingList);
 
+  const handleIngredientCheck = async (
+    recipeName: string,
+    ingredientIndex: number
+  ) => {
+    const updatedShoppingList = [...shoppingList];
+
+    // Update the checked property of the ingredient
+    updatedShoppingList.forEach((recipe) => {
+      if (recipe.name === recipeName) {
+        recipe.ingredients[ingredientIndex].checked =
+          !recipe.ingredients[ingredientIndex].checked;
+      }
+    });
+
+    setShoppingList(updatedShoppingList);
+
+    // Update the ingredient in Firestore
+    const recipeDocRef = doc(
+      db,
+      "Ingredients",
+      currentUser.uid,
+      "Dish",
+      recipeName
+    );
+    await updateDoc(recipeDocRef, {
+      ingredients: updatedShoppingList.find(
+        (recipe) => recipe.name === recipeName
+      )?.ingredients,
+    });
+  };
+
   return (
     <div>
       <Navbar />
@@ -85,9 +123,17 @@ const ShoppingList: React.FC<ShoppingListProps> = ({ currentUser }) => {
                         {ingredient.ingredient} - {ingredient.measure}
                       </h3>
                       {ingredient.checked === true ? (
-                        <MdOutlineCheckBox />
+                        <MdOutlineCheckBox
+                          onClick={() =>
+                            handleIngredientCheck(item.name, index)
+                          }
+                        />
                       ) : (
-                        <MdOutlineCheckBoxOutlineBlank />
+                        <MdOutlineCheckBoxOutlineBlank
+                          onClick={() =>
+                            handleIngredientCheck(item.name, index)
+                          }
+                        />
                       )}
                     </li>
                   ))}
