@@ -4,14 +4,19 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 const MobileNav = ({
   setHamburgerMenu,
+  setSearchBar,
 }: {
   setHamburgerMenu: React.Dispatch<React.SetStateAction<boolean>>;
+  setSearchBar: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   return (
     <>
       <div className="flex items-center">
         <button aria-label="Search for dish">
-          <AiOutlineSearch className="text-3xl mr-1" />
+          <AiOutlineSearch
+            onClick={() => setSearchBar(true)}
+            className="text-3xl mr-1"
+          />
         </button>
         <button data-cy="openHamburgerMenu" aria-label="Open Menu">
           <GiHamburgerMenu
