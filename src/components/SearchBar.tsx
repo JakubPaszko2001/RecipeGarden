@@ -8,6 +8,7 @@ interface Props {
 
 const SearchBar = ({ searchBar, setSearchBar }: Props) => {
   const [searchBy, setSearchBy] = useState("Ingredient");
+  const [inputValue, setInputValue] = useState("");
 
   function changeSearchBy(value: string) {
     setSearchBy(value);
@@ -22,6 +23,11 @@ const SearchBar = ({ searchBar, setSearchBar }: Props) => {
       return "Type Dish Name (Arrabiata)";
     }
     return "";
+  }
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setInputValue(e.target.value);
+    console.log(inputValue);
   }
 
   return (
@@ -68,6 +74,7 @@ const SearchBar = ({ searchBar, setSearchBar }: Props) => {
         <div className="relative mt-4">
           <input
             placeholder={getInputPlaceholder()}
+            onChange={handleChange}
             className="w-full p-2 pr-8 bg-mainGreen border-2 border-white rounded-xl placeholder:text-white focus:outline-none"
           ></input>
           <button className="absolute right-2 top-1/2 -translate-y-1/2 text-2xl">
