@@ -88,12 +88,12 @@ const fetchDish = (dishId: string | undefined) => {
     });
 };
 
-const fetchByIngredient = (Ingredient: string | undefined) => {
+const fetchByIngredient = (ingredient: string | undefined) => {
   const options = {
     method: "GET",
     url: "https://themealdb.p.rapidapi.com/filter.php",
     params: {
-      i: { Ingredient },
+      i: ingredient,
     },
     headers: {
       "X-RapidAPI-Key": "57607c4060msh8305edef8d177d9p1a088fjsnad865a1577b2",
@@ -104,7 +104,7 @@ const fetchByIngredient = (Ingredient: string | undefined) => {
   return axios
     .request(options)
     .then(function (response) {
-      // console.log(response.data.meals);
+      console.log(response.data.meals);
       return response.data.meals;
     })
     .catch(function (error) {
@@ -116,7 +116,7 @@ const fetchByDishName = (dishName: string | undefined) => {
   const options = {
     method: "GET",
     url: "https://themealdb.p.rapidapi.com/search.php",
-    params: { dishName },
+    params: dishName,
     headers: {
       "X-RapidAPI-Key": "57607c4060msh8305edef8d177d9p1a088fjsnad865a1577b2",
       "X-RapidAPI-Host": "themealdb.p.rapidapi.com",
@@ -126,7 +126,7 @@ const fetchByDishName = (dishName: string | undefined) => {
   return axios
     .request(options)
     .then(function (response) {
-      // console.log(response.data.meals);
+      console.log(response.data.meals);
       return response.data.meals;
     })
     .catch(function (error) {
