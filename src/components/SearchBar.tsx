@@ -53,6 +53,10 @@ const SearchBar = ({ searchBar, setSearchBar }: Props) => {
     setVisibleItems((prevVisibleItems) => prevVisibleItems + 5);
   }
 
+  const enableScroll = () => {
+    document.body.style.overflow = "auto";
+  };
+
   return (
     <nav
       className={`w-full h-screen fixed ${
@@ -62,7 +66,10 @@ const SearchBar = ({ searchBar, setSearchBar }: Props) => {
       <div className="h-[10vh] w-full flex justify-end items-center p-4">
         <button>
           <AiOutlineClose
-            onClick={() => setSearchBar(false)}
+            onClick={() => {
+              setSearchBar(false);
+              enableScroll();
+            }}
             className="text-3xl"
           />
         </button>
@@ -113,14 +120,17 @@ const SearchBar = ({ searchBar, setSearchBar }: Props) => {
           </button>
         </div>
         <div className="mt-4">
-          <ul className="h-[60vh] overflow-y-auto">
+          <ul className="flex flex-col gap-4 h-[70vh] overflow-y-auto">
             {fetchData.slice(0, visibleItems).map((meal) => (
-              <li
-                key={meal.idMeal}
-                className="w-full p-2 border-2 border-white rounded-xl"
-              >
-                <img src={meal.strMealThumb} alt="" />
-                <p>{meal.strMeal}</p>
+              <li key={meal.idMeal} className="flex w-full">
+                <img
+                  className="w-1/3 rounded-xl"
+                  src={meal.strMealThumb}
+                  alt={meal.strMeal}
+                />
+                <p className="flex ml-4 items-center justify-center text-xl">
+                  {meal.strMeal}
+                </p>
               </li>
             ))}
           </ul>
