@@ -24,8 +24,6 @@
   padding-left: 20px;
 }
 .swiper-slide {
-  /* background: green; */
-
   display: flex;
   flex-direction: column;
   justify-content: center;
