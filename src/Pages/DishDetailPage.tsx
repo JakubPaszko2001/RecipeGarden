@@ -9,7 +9,7 @@ import {
   collection,
   serverTimestamp,
 } from "firebase/firestore";
-import { colRef, db } from "../config/firebase";
+import { db } from "../config/firebase";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 interface Dish {
@@ -76,7 +76,7 @@ const DishDetailPage = ({ currentUser }: { currentUser: any }) => {
       }
     };
     dishFetchData();
-  }, []);
+  }, [dishId]);
 
   const ingredientsAndMeasures: { ingredient: string; measure: string }[] = [];
 
@@ -95,15 +95,15 @@ const DishDetailPage = ({ currentUser }: { currentUser: any }) => {
 
   const getAllDocuments = async () => {
     const querySnapshot = await getDocs(collectionRef);
-    querySnapshot.forEach((doc) => {
-      console.log(`${doc.id}`);
-    });
+    // querySnapshot.forEach((doc) => {
+    //   console.log(`${doc.id}`);
+    // });
   };
 
   getAllDocuments();
 
-  console.log(ingredientsAndMeasures);
-  console.log(dishData);
+  // console.log(ingredientsAndMeasures);
+  // console.log(dishData);
   return (
     <>
       <Navbar />
