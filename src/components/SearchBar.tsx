@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
 import { fetchByDishName, fetchByIngredient } from "../config/axios";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   searchBar: boolean;
@@ -39,7 +40,7 @@ const SearchBar = ({ searchBar, setSearchBar }: Props) => {
       if (searchBy === "Ingredient" || searchBy === "Multi-Ingredient") {
         const response = await fetchByIngredient(inputValue);
         setFetchData(response);
-        console.log(response);
+        // console.log(response);
       } else if (searchBy === "Dish Name") {
         const response = await fetchByDishName(inputValue);
         setFetchData(response);
@@ -55,6 +56,11 @@ const SearchBar = ({ searchBar, setSearchBar }: Props) => {
 
   const enableScroll = () => {
     document.body.style.overflow = "auto";
+  };
+
+  const navigate = useNavigate();
+  const navigateToDetails = (dishId: string) => {
+    navigate(`/Category/Dish/${dishId}`);
   };
 
   return (
@@ -122,7 +128,14 @@ const SearchBar = ({ searchBar, setSearchBar }: Props) => {
         <div className="mt-4">
           <ul className="flex flex-col gap-4 h-[70vh] overflow-y-auto">
             {fetchData.slice(0, visibleItems).map((meal) => (
-              <li key={meal.idMeal} className="flex w-full">
+              <li
+                key={meal.idMeal}
+                className="flex w-full cursor-pointer"
+                onClick={() => {
+                  navigateToDetails(meal.idMeal);
+                  setSearchBar(false);
+                }}
+              >
                 <img
                   className="w-1/3 rounded-xl"
                   src={meal.strMealThumb}
